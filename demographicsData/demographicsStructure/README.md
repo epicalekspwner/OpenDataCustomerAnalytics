@@ -1,6 +1,9 @@
 ## demographicsStructure: Files, Metadata & Attributes
 
 ### **Files**
+
+*Note: only the last 5 years are being considerated for data coherence and relevance purposes!*
+
 - ```20XX_demographicsStructure_Absolute.csv```: Absolute numbers of people per canton
 - ```20XX_demographicsStructure_CantonRelative.csv```: Relative numbers of people (percentages) within the canton
 - ```20XX_demographicsStructure_CountryRelative.csv```: Relative numbers of people (percentages) within the country

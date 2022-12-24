@@ -1,4 +1,4 @@
-## equidsCantons: Files, Metadata & Attributes
+## equidsCensus: File, Metadata & Attributes
 
 ### **File**
 

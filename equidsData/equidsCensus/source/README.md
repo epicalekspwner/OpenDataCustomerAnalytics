@@ -22,7 +22,7 @@
 #### Dataset Attributes
 - **Names**: See below
 - **Values**:
-  - ```Year```: Textual
+  - ```Year```: Numerical
   - ```AG```: Numerical
   - ```AI```: Numerical
   - ```AR```: Numerical

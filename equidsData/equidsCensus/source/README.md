@@ -2,7 +2,7 @@
 
 ### **File**
 
-- ```equids-canton.csv```: Census of average number of equids living in a given canton during a given year
+- ```equids-canton.csv```: Average number of equids living in a given canton during a given year
 
 ### **Metadata**
 

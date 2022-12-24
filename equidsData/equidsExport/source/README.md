@@ -138,6 +138,7 @@
 - **Download URL**: https://tierstatistik.identitas.ch/data/equids-exportCanton.csv
 
 ### **Attributes**
+
   - ```Year```: Considered year
   - ```AG```: Number of equids exported from AG during a given year
   - ```AI```: Number of equids exported from AI during a given year

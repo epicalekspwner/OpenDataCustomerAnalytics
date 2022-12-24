@@ -1,7 +1,7 @@
 ## equidsExport: File, Metadata & Attributes
 
 ### **File**
-- ```equids-exportCanton.csv```: Average number of equids exported from a given canton during a given year
+- ```equids-exportCanton.csv```: Number of equids exported by canton
 
 ### **Metadata**
 
@@ -22,6 +22,7 @@
 - **Names**: See below
 - **Values**:
   - ```Year```: Numerical
+  - ```Month```: Numerical
   - ```AG```: Numerical
   - ```AI```: Numerical
   - ```AR```: Numerical
@@ -49,9 +50,9 @@
   - ```ZG```: Numerical
   - ```ZH```: Numerical
   - ```NaN```: Numerical
-  - ```CH```: Numerical
 - **Types**:
   - ```Year```: Integer
+  - ```Month```: Integer
   - ```AG```: Integer
   - ```AI```: Integer
   - ```AR```: Integer
@@ -82,40 +83,40 @@
   - ```CH```: Integer
 - **Units**:
   - ```Year```: Considered year
-  - ```AG```: Number of equids exported from AG during a given year
-  - ```AI```: Number of equids exported from AI during a given year
-  - ```AR```: Number of equids exported from AR during a given year
-  - ```BE```: Number of equids exported from BE during a given year
-  - ```BL```: Number of equids exported from BL during a given year
-  - ```BS```: Number of equids exported from BS during a given year
-  - ```FR```: Number of equids exported from FR during a given year
-  - ```GE```: Number of equids exported from GE during a given year
-  - ```GL```: Number of equids exported from GL during a given year
-  - ```GR```: Number of equids exported from GR during a given year
-  - ```JU```: Number of equids exported from JU during a given year
-  - ```LU```: Number of equids exported from LU during a given year
-  - ```NE```: Number of equids exported from NE during a given year
-  - ```NW```: Number of equids exported from NW during a given year
-  - ```OW```: Number of equids exported from OW during a given year
-  - ```SG```: Number of equids exported from SG during a given year
-  - ```SH```: Number of equids exported from SH during a given year
-  - ```SO```: Number of equids exported from SO during a given year
-  - ```SZ```: Number of equids exported from SZ during a given year
-  - ```TG```: Number of equids exported from TG during a given year
-  - ```TI```: Number of equids exported from TI during a given year
-  - ```UR```: Number of equids exported from UR during a given year
-  - ```VD```: Number of equids exported from VD during a given year
-  - ```VS```: Number of equids exported from VS during a given year
-  - ```ZG```: Number of equids exported from ZG during a given year
-  - ```ZH```: Number of equids exported from ZH during a given year
-  - ```NaN```: Number of equids exported from undefined canton during a given year
-  - ```CH```: Number of equids exported from CH during a given year
+  - ```Month```: Considered month
+  - ```AG```: Number of equids exported from AG during a given year/month
+  - ```AI```: Number of equids exported from AI during a given year/month
+  - ```AR```: Number of equids exported from AR during a given year/month
+  - ```BE```: Number of equids exported from BE during a given year/month
+  - ```BL```: Number of equids exported from BL during a given year/month
+  - ```BS```: Number of equids exported from BS during a given year/month
+  - ```FR```: Number of equids exported from FR during a given year/month
+  - ```GE```: Number of equids exported from GE during a given year/month
+  - ```GL```: Number of equids exported from GL during a given year/month
+  - ```GR```: Number of equids exported from GR during a given year/month
+  - ```JU```: Number of equids exported from JU during a given year/month
+  - ```LU```: Number of equids exported from LU during a given year/month
+  - ```NE```: Number of equids exported from NE during a given year/month
+  - ```NW```: Number of equids exported from NW during a given year/month
+  - ```OW```: Number of equids exported from OW during a given year/month
+  - ```SG```: Number of equids exported from SG during a given year/month
+  - ```SH```: Number of equids exported from SH during a given year/month
+  - ```SO```: Number of equids exported from SO during a given year/month
+  - ```SZ```: Number of equids exported from SZ during a given year/month
+  - ```TG```: Number of equids exported from TG during a given year/month
+  - ```TI```: Number of equids exported from TI during a given year/month
+  - ```UR```: Number of equids exported from UR during a given year/month
+  - ```VD```: Number of equids exported from VD during a given year/month
+  - ```VS```: Number of equids exported from VS during a given year/month
+  - ```ZG```: Number of equids exported from ZG during a given year/month
+  - ```ZH```: Number of equids exported from ZH during a given year/month
+  - ```NaN```: Number of equids exported from undefined canton during a given year/month
 
 #### Level of Detail
 - **Spatial Coverage**: Switzerland
 - **Temporal Coverage**: 2016-2022
 - **Spacial Granularity**: Canton
-- **Temporal Granularity**: Year
+- **Temporal Granularity**: Month
 
 #### License
 - **License Name**: OPEN-BY
@@ -140,31 +141,31 @@
 ### **Attributes**
 
   - ```Year```: Considered year
-  - ```AG```: Number of equids exported from AG during a given year
-  - ```AI```: Number of equids exported from AI during a given year
-  - ```AR```: Number of equids exported from AR during a given year
-  - ```BE```: Number of equids exported from BE during a given year
-  - ```BL```: Number of equids exported from BL during a given year
-  - ```BS```: Number of equids exported from BS during a given year
-  - ```FR```: Number of equids exported from FR during a given year
-  - ```GE```: Number of equids exported from GE during a given year
-  - ```GL```: Number of equids exported from GL during a given year
-  - ```GR```: Number of equids exported from GR during a given year
-  - ```JU```: Number of equids exported from JU during a given year
-  - ```LU```: Number of equids exported from LU during a given year
-  - ```NE```: Number of equids exported from NE during a given year
-  - ```NW```: Number of equids exported from NW during a given year
-  - ```OW```: Number of equids exported from OW during a given year
-  - ```SG```: Number of equids exported from SG during a given year
-  - ```SH```: Number of equids exported from SH during a given year
-  - ```SO```: Number of equids exported from SO during a given year
-  - ```SZ```: Number of equids exported from SZ during a given year
-  - ```TG```: Number of equids exported from TG during a given year
-  - ```TI```: Number of equids exported from TI during a given year
-  - ```UR```: Number of equids exported from UR during a given year
-  - ```VD```: Number of equids exported from VD during a given year
-  - ```VS```: Number of equids exported from VS during a given year
-  - ```ZG```: Number of equids exported from ZG during a given year
-  - ```ZH```: Number of equids exported from ZH during a given year
-  - ```NaN```: Number of equids exported from undefined canton during a given year
-  - ```CH```: Number of equids exported from CH during a given year
+  - ```Month```: Considered month
+  - ```AG```: Number of equids exported from AG during a given year/month
+  - ```AI```: Number of equids exported from AI during a given year/month
+  - ```AR```: Number of equids exported from AR during a given year/month
+  - ```BE```: Number of equids exported from BE during a given year/month
+  - ```BL```: Number of equids exported from BL during a given year/month
+  - ```BS```: Number of equids exported from BS during a given year/month
+  - ```FR```: Number of equids exported from FR during a given year/month
+  - ```GE```: Number of equids exported from GE during a given year/month
+  - ```GL```: Number of equids exported from GL during a given year/month
+  - ```GR```: Number of equids exported from GR during a given year/month
+  - ```JU```: Number of equids exported from JU during a given year/month
+  - ```LU```: Number of equids exported from LU during a given year/month
+  - ```NE```: Number of equids exported from NE during a given year/month
+  - ```NW```: Number of equids exported from NW during a given year/month
+  - ```OW```: Number of equids exported from OW during a given year/month
+  - ```SG```: Number of equids exported from SG during a given year/month
+  - ```SH```: Number of equids exported from SH during a given year/month
+  - ```SO```: Number of equids exported from SO during a given year/month
+  - ```SZ```: Number of equids exported from SZ during a given year/month
+  - ```TG```: Number of equids exported from TG during a given year/month
+  - ```TI```: Number of equids exported from TI during a given year/month
+  - ```UR```: Number of equids exported from UR during a given year/month
+  - ```VD```: Number of equids exported from VD during a given year/month
+  - ```VS```: Number of equids exported from VS during a given year/month
+  - ```ZG```: Number of equids exported from ZG during a given year/month
+  - ```ZH```: Number of equids exported from ZH during a given year/month
+  - ```NaN```: Number of equids exported from undefined canton during a given year/month

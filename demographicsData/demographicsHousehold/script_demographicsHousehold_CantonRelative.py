@@ -1,6 +1,6 @@
 ### script_CantonRelative
 ### Convert Absolute Values Into Relative Ones (Within Canton)
-### /demographicsHousehold/
+### /demographicsData/demographicsHousehold/
 
 ### Import Pandas and OS Libraries
 import pandas as pd

@@ -61,4 +61,4 @@
   - **Country**: CH
   
 #### 
-- ```gdp_20XX```: Gross domestic product (GDP) by canton exprimed in millions CHF
+- ```gdp```: Gross domestic product (GDP) by canton exprimed in millions CHF

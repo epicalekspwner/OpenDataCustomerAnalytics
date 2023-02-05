@@ -22,7 +22,9 @@
 #### Dataset Attributes
 - **Names**: See below
 - **Values**:
-  - ```equidsNumberCensus```: Numerical 
+  - ```equidsNumberCensus```: Numerical
+- **Types**:
+  - ```equidsNumberCensus```: Integer
 - **Units**:
   - ```equidsNumberCensus```: Number of equids
 

@@ -1,8 +1,8 @@
 ## equidsCensus: File, Metadata & Attributes
 
 ### **File**
-
-- ```equids-canton.csv```: Number of equids by canton
+*Note: only the last 5 years are being considerated for data coherence and relevance purposes!*
+- ```20XX_equidsCensus.csv```: Number of equids by canton
 
 ### **Metadata**
 
@@ -22,97 +22,9 @@
 #### Dataset Attributes
 - **Names**: See below
 - **Values**:
-  - ```Year```: Numerical
-  - ```Month```: Numerical
-  - ```AG```: Numerical
-  - ```AI```: Numerical
-  - ```AR```: Numerical
-  - ```BE```: Numerical
-  - ```BL```: Numerical
-  - ```BS```: Numerical
-  - ```FR```: Numerical
-  - ```GE```: Numerical
-  - ```GL```: Numerical
-  - ```GR```: Numerical
-  - ```JU```: Numerical
-  - ```LU```: Numerical
-  - ```NE```: Numerical
-  - ```NW```: Numerical
-  - ```OW```: Numerical
-  - ```SG```: Numerical
-  - ```SH```: Numerical
-  - ```SO```: Numerical
-  - ```SZ```: Numerical
-  - ```TG```: Numerical
-  - ```TI```: Numerical
-  - ```UR```: Numerical
-  - ```VD```: Numerical
-  - ```VS```: Numerical
-  - ```ZG```: Numerical
-  - ```ZH```: Numerical
-  - ```NaN```: Numerical
-  - ```CH```: Numerical
-- **Types**:
-  - ```Year```: Integer
-  - ```Month```: Integer
-  - ```AG```: Integer
-  - ```AI```: Integer
-  - ```AR```: Integer
-  - ```BE```: Integer
-  - ```BL```: Integer
-  - ```BS```: Integer
-  - ```FR```: Integer
-  - ```GE```: Integer
-  - ```GL```: Integer
-  - ```GR```: Integer
-  - ```JU```: Integer
-  - ```LU```: Integer
-  - ```NE```: Integer
-  - ```NW```: Integer
-  - ```OW```: Integer
-  - ```SG```: Integer
-  - ```SH```: Integer
-  - ```SO```: Integer
-  - ```SZ```: Integer
-  - ```TG```: Integer
-  - ```TI```: Integer
-  - ```UR```: Integer
-  - ```VD```: Integer
-  - ```VS```: Integer
-  - ```ZG```: Integer
-  - ```ZH```: Integer
-  - ```NaN```: Integer
-  - ```CH```: Integer
+  - ```equidsNumberCensus```: Numerical 
 - **Units**:
-  - ```Year```: Considered year
-  - ```Month```: Considered month
-  - ```AG```: Number of equids (in average) in AG during a given year/month
-  - ```AI```: Number of equids (in average) in AI during a given year/month
-  - ```AR```: Number of equids (in average) in AR during a given year/month
-  - ```BE```: Number of equids (in average) in BE during a given year/month
-  - ```BL```: Number of equids (in average) in BL during a given year/month
-  - ```BS```: Number of equids (in average) in BS during a given year/month
-  - ```FR```: Number of equids (in average) in FR during a given year/month
-  - ```GE```: Number of equids (in average) in GE during a given year/month
-  - ```GL```: Number of equids (in average) in GL during a given year/month
-  - ```GR```: Number of equids (in average) in GR during a given year/month
-  - ```JU```: Number of equids (in average) in JU during a given year/month
-  - ```LU```: Number of equids (in average) in LU during a given year/month
-  - ```NE```: Number of equids (in average) in NE during a given year/month
-  - ```NW```: Number of equids (in average) in NW during a given year/month
-  - ```OW```: Number of equids (in average) in OW during a given year/month
-  - ```SG```: Number of equids (in average) in SG during a given year/month
-  - ```SH```: Number of equids (in average) in SH during a given year/month
-  - ```SO```: Number of equids (in average) in SO during a given year/month
-  - ```SZ```: Number of equids (in average) in SZ during a given year/month
-  - ```TG```: Number of equids (in average) in TG during a given year/month
-  - ```TI```: Number of equids (in average) in TI during a given year/month
-  - ```UR```: Number of equids (in average) in UR during a given year/month
-  - ```VD```: Number of equids (in average) in VD during a given year/month
-  - ```VS```: Number of equids (in average) in VS during a given year/month
-  - ```ZG```: Number of equids (in average) in ZG during a given year/month
-  - ```ZH```: Number of equids (in average) in ZH during a given year/month
-  - ```NaN```: Number of equids (in average) in undefined canton during a given year/month
+  - ```equidsNumberCensus```: Number of equids
 
 #### Level of Detail
 - **Spatial Coverage**: Switzerland
@@ -142,32 +54,10 @@
 
 ### **Attributes**
 
-  - ```Year```: Considered year
-  - ```Month```: Considered month
-  - ```AG```: Number of equids (in average) in AG during a given year/month
-  - ```AI```: Number of equids (in average) in AI during a given year/month
-  - ```AR```: Number of equids (in average) in AR during a given year/month
-  - ```BE```: Number of equids (in average) in BE during a given year/month
-  - ```BL```: Number of equids (in average) in BL during a given year/month
-  - ```BS```: Number of equids (in average) in BS during a given year/month
-  - ```FR```: Number of equids (in average) in FR during a given year/month
-  - ```GE```: Number of equids (in average) in GE during a given year/month
-  - ```GL```: Number of equids (in average) in GL during a given year/month
-  - ```GR```: Number of equids (in average) in GR during a given year/month
-  - ```JU```: Number of equids (in average) in JU during a given year/month
-  - ```LU```: Number of equids (in average) in LU during a given year/month
-  - ```NE```: Number of equids (in average) in NE during a given year/month
-  - ```NW```: Number of equids (in average) in NW during a given year/month
-  - ```OW```: Number of equids (in average) in OW during a given year/month
-  - ```SG```: Number of equids (in average) in SG during a given year/month
-  - ```SH```: Number of equids (in average) in SH during a given year/month
-  - ```SO```: Number of equids (in average) in SO during a given year/month
-  - ```SZ```: Number of equids (in average) in SZ during a given year/month
-  - ```TG```: Number of equids (in average) in TG during a given year/month
-  - ```TI```: Number of equids (in average) in TI during a given year/month
-  - ```UR```: Number of equids (in average) in UR during a given year/month
-  - ```VD```: Number of equids (in average) in VD during a given year/month
-  - ```VS```: Number of equids (in average) in VS during a given year/month
-  - ```ZG```: Number of equids (in average) in ZG during a given year/month
-  - ```ZH```: Number of equids (in average) in ZH during a given year/month
-  - ```NaN```: Number of equids (in average) in undefined canton during a given year/month
+#### Region
+- ```region```: Region of interest 
+  - **Canton**: AG, AI, AR, BE, BL, BS, FR, GE, GL, GR, JU, LU, NE, NW, OW, SG, SH, SO, SZ, TG, TI, UR, VD, VS, ZG, ZH 
+  - **Country**: CH 
+
+#### Total
+- ```equidsNumberCensus```: Number of equids (in average) per canton

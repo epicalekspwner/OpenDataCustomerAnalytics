@@ -1,0 +1,346 @@
+// ---------------------------
+// ----- Knowledge Graph -----
+// ---------------------------
+
+// ----- Environment Initialization -----
+
+// Retrieve All Non-Standalone Nodes (n) with a Relation (r) & Delete Them
+MATCH (n)-[r]->() DELETE n, r
+
+// Retrieve All Remaining Standalone Nodes (n) & Delete Them
+MATCH (n) DELETE (n)
+
+// ----- Core Structure -----
+
+// Create Node for Each Canton with its FSO Number
+LOAD CSV WITH HEADERS FROM 'https://raw.githubusercontent.com/epicalekspwner/OpenDataCustomerAnalytics/main/geographicsArchitecture/geometryCorrelation/addGeoCorrTables/be-t-00.04-agv-01_KT.csv' AS CantonFSO
+CREATE (:canton{
+	cantonName:CantonFSO.GDEKT, 
+	cantonFSO:CantonFSO.KTNR
+});
+
+// Create Year Node for Each Canton
+UNWIND range(2016, 2020) as year
+MATCH (c:canton)
+CREATE (:year{
+	year:year,
+	cantonName:c.cantonName,
+	cantonFSO:c.cantonFSO
+});
+
+// Create Relationship Between Year & Canton Nodes
+MATCH (c:canton), (y:year)
+WHERE EXISTS (c.cantonName) AND EXISTS (y.cantonName) AND c.cantonName=y.cantonName
+CREATE (y)-[:STATS_OF_CANTON]->(c)
+
+// ----- demographicsEducation -----
+
+// Create Nodes with Statistics
+UNWIND [{year:2016, url:'https://raw.githubusercontent.com/epicalekspwner/OpenDataCustomerAnalytics/main/demographicsData/demographicsEducation/2016_demographicsEducation_Absolute.csv'}, {year:2017, url:'https://raw.githubusercontent.com/epicalekspwner/OpenDataCustomerAnalytics/main/demographicsData/demographicsEducation/2017_demographicsEducation_Absolute.csv'}, {year:2018, url:'https://raw.githubusercontent.com/epicalekspwner/OpenDataCustomerAnalytics/main/demographicsData/demographicsEducation/2018_demographicsEducation_Absolute.csv'}, {year:2019, url:'https://raw.githubusercontent.com/epicalekspwner/OpenDataCustomerAnalytics/main/demographicsData/demographicsEducation/2019_demographicsEducation_Absolute.csv'}, {year:2020, url:'https://raw.githubusercontent.com/epicalekspwner/OpenDataCustomerAnalytics/main/demographicsData/demographicsEducation/2020_demographicsEducation_Absolute.csv'}] AS demographicsEducation_urls
+LOAD CSV WITH HEADERS FROM demographicsEducation_urls.url AS demographicsEducationcsv
+CREATE (:demographicsEducation{
+	nodeType:'demographicsEducation',
+	year:demographicsEducation_urls.year,
+	region:demographicsEducationcsv.region,
+	total:demographicsEducationcsv.total,
+	withoutPostCompulsoryEducation:demographicsEducationcsv.withoutPostCompulsoryEducation,
+	secondLevel2ProfessionalTraining:demographicsEducationcsv.secondLevel2ProfessionalTraining,
+	secondLevel2GeneralTraining:demographicsEducationcsv.secondLevel2GeneralTraining,
+	thirdLevelHigherProfessionalTraining:demographicsEducationcsv.thirdLevelHigherProfessionalTraining,
+	thirdLevelUniversities:demographicsEducationcsv.thirdLevelUniversities
+});
+
+// Create Relationship
+MATCH (d:demographicsEducation), (y:year)
+WHERE EXISTS (d.year) AND EXISTS (y.year) AND d.year=y.year AND EXISTS (d.region) AND EXISTS (y.cantonName) AND d.region=y.cantonName
+CREATE (d)-[:STATS_OF_YEAR]->(y)
+
+// ----- demographicsHousehold -----
+
+// Create Nodes with Statistics
+UNWIND [{year:2016, url:'https://raw.githubusercontent.com/epicalekspwner/OpenDataCustomerAnalytics/main/demographicsData/demographicsHousehold/2016_demographicsHousehold_Absolute.csv'}, {year:2017, url:'https://raw.githubusercontent.com/epicalekspwner/OpenDataCustomerAnalytics/main/demographicsData/demographicsHousehold/2017_demographicsHousehold_Absolute.csv'}, {year:2018, url:'https://raw.githubusercontent.com/epicalekspwner/OpenDataCustomerAnalytics/main/demographicsData/demographicsHousehold/2018_demographicsHousehold_Absolute.csv'}, {year:2019, url:'https://raw.githubusercontent.com/epicalekspwner/OpenDataCustomerAnalytics/main/demographicsData/demographicsHousehold/2019_demographicsHousehold_Absolute.csv'}, {year:2020, url:'https://raw.githubusercontent.com/epicalekspwner/OpenDataCustomerAnalytics/main/demographicsData/demographicsHousehold/2020_demographicsHousehold_Absolute.csv'}] AS demographicsHousehold_urls
+LOAD CSV WITH HEADERS FROM demographicsHousehold_urls.url AS demographicsHouseholdcsv
+CREATE (:demographicsHousehold{
+	nodeType:'demographicsHousehold',
+	year:demographicsHousehold_urls.year,
+	region:demographicsHouseholdcsv.region,
+	total:demographicsHouseholdcsv.total,
+	onePersonHousehold:demographicsHouseholdcsv.onePersonHousehold,
+	twoPersonHousehold:demographicsHouseholdcsv.twoPersonHousehold,
+	threePersonHousehold:demographicsHouseholdcsv.threePersonHousehold,
+	fourPersonHousehold:demographicsHouseholdcsv.fourPersonHousehold,
+	fivePersonHousehold:demographicsHouseholdcsv.fivePersonHousehold,
+	sixMorePersonHousehold:demographicsHouseholdcsv.sixMorePersonHousehold,
+	averageSizeHousehold:demographicsHouseholdcsv.averageSizeHousehold
+});
+
+// Create Relationship
+MATCH (d:demographicsHousehold), (y:year)
+WHERE EXISTS (d.year) AND EXISTS (y.year) AND d.year=y.year AND EXISTS (d.region) AND EXISTS (y.cantonName) AND d.region=y.cantonName
+CREATE (d)-[:STATS_OF_YEAR]->(y)
+
+// ----- demographicsHousingOwnership -----
+
+// Create Nodes with Statistics
+UNWIND [{year:2016, url:'https://raw.githubusercontent.com/epicalekspwner/OpenDataCustomerAnalytics/main/demographicsData/demographicsHousingOwnership/2016_demographicsHousingOwnership.csv'}, {year:2017, url:'https://raw.githubusercontent.com/epicalekspwner/OpenDataCustomerAnalytics/main/demographicsData/demographicsHousingOwnership/2017_demographicsHousingOwnership.csv'}, {year:2018, url:'https://raw.githubusercontent.com/epicalekspwner/OpenDataCustomerAnalytics/main/demographicsData/demographicsHousingOwnership/2018_demographicsHousingOwnership.csv'}, {year:2019, url:'https://raw.githubusercontent.com/epicalekspwner/OpenDataCustomerAnalytics/main/demographicsData/demographicsHousingOwnership/2019_demographicsHousingOwnership.csv'}, {year:2020, url:'https://raw.githubusercontent.com/epicalekspwner/OpenDataCustomerAnalytics/main/demographicsData/demographicsHousingOwnership/2020_demographicsHousingOwnership.csv'}] AS demographicsHousingOwnership_urls
+LOAD CSV WITH HEADERS FROM demographicsHousingOwnership_urls.url AS demographicsHousingOwnershipcsv
+CREATE (:demographicsHousingOwnership{
+	nodeType:'demographicsHousingOwnership',
+	year:demographicsHousingOwnership_urls.year,
+	region:demographicsHousingOwnershipcsv.region,
+	totalHousing:demographicsHousingOwnershipcsv.totalHousing,
+	tenantHousing:demographicsHousingOwnershipcsv.tenantHousing,
+	ownershipRate:demographicsHousingOwnershipcsv.ownershipRate
+});
+
+// Create Relationship
+MATCH (d:demographicsHousingOwnership), (y:year)
+WHERE EXISTS (d.year) AND EXISTS (y.year) AND d.year=y.year AND EXISTS (d.region) AND EXISTS (y.cantonName) AND d.region=y.cantonName
+CREATE (d)-[:STATS_OF_YEAR]->(y)
+
+// ----- demographicsIncome -----
+
+// Correlation Table
+UNWIND [2016, 2018, 2020] AS demographicsIncomeYear
+LOAD CSV WITH HEADERS FROM 'https://raw.githubusercontent.com/epicalekspwner/OpenDataCustomerAnalytics/main/knowledgeGraph/demographicsIncome_correlationTable.csv' AS demographicsIncomeCorrelationcsv
+CREATE (:demographicsIncome{
+	nodeType:'demographicsIncome',
+	year:demographicsIncomeYear,
+    cantonFSO:demographicsIncomeCorrelationcsv.cantonFSO,
+    cantonName:demographicsIncomeCorrelationcsv.canton,
+    incomeGroupFSO:demographicsIncomeCorrelationcsv.incomeGroupFSO
+});
+
+// Create Relationship
+MATCH (d:demographicsIncome), (y:year)
+WHERE EXISTS (d.cantonName) AND EXISTS (y.cantonName) AND d.cantonName=y.cantonName AND EXISTS (d.year) AND EXISTS (d.year) AND d.year=y.year
+CREATE (d)-[:STATS_OF_YEAR]->(y)
+
+// 2016 Income Statistics
+UNWIND [{incomeGroupFSO:1, url:'https://raw.githubusercontent.com/epicalekspwner/OpenDataCustomerAnalytics/main/demographicsData/demographicsIncome/2016_demographicsIncome_Group1.csv'}, {incomeGroupFSO:2, url:'https://raw.githubusercontent.com/epicalekspwner/OpenDataCustomerAnalytics/main/demographicsData/demographicsIncome/2016_demographicsIncome_Group2.csv'}, {incomeGroupFSO:3, url:'https://raw.githubusercontent.com/epicalekspwner/OpenDataCustomerAnalytics/main/demographicsData/demographicsIncome/2016_demographicsIncome_Group3.csv'}, {incomeGroupFSO:4, url:'https://raw.githubusercontent.com/epicalekspwner/OpenDataCustomerAnalytics/main/demographicsData/demographicsIncome/2016_demographicsIncome_Group4.csv'}, {incomeGroupFSO:5, url:'https://raw.githubusercontent.com/epicalekspwner/OpenDataCustomerAnalytics/main/demographicsData/demographicsIncome/2016_demographicsIncome_Group5.csv'}, {incomeGroupFSO:6, url:'https://raw.githubusercontent.com/epicalekspwner/OpenDataCustomerAnalytics/main/demographicsData/demographicsIncome/2016_demographicsIncome_Group6.csv'}, {incomeGroupFSO:7, url:'https://raw.githubusercontent.com/epicalekspwner/OpenDataCustomerAnalytics/main/demographicsData/demographicsIncome/2016_demographicsIncome_Group7.csv'}] AS demographicsIncomeGroup_urls
+LOAD CSV WITH HEADERS FROM demographicsIncomeGroup_urls.url AS demographicsIncomeGroupcsv
+CREATE (:demographicsIncomeGroup{
+	nodeType:'demographicsIncomeGroup',
+	year:2016,
+	incomeGroupFSO:toString(demographicsIncomeGroup_urls.incomeGroupFSO),
+	category:demographicsIncomeGroupcsv.category,
+	ageAllTotal:demographicsIncomeGroupcsv.ageAllTotal,
+	ageAllFemale:demographicsIncomeGroupcsv.ageAllFemale,
+	ageAllMale:demographicsIncomeGroupcsv.ageAllMale,
+	age29minusTotal:demographicsIncomeGroupcsv.age29minusTotal,
+	age29minusFemale:demographicsIncomeGroupcsv.age29minusFemale,
+	age29minusMale:demographicsIncomeGroupcsv.age29minusMale,
+	age30_49Total:demographicsIncomeGroupcsv.age30_49Total,
+	age30_49Female:demographicsIncomeGroupcsv.age30_49Female,
+	age30_49Male:demographicsIncomeGroupcsv.age30_49Male,
+	age50plusTotal:demographicsIncomeGroupcsv.age50plusTotal,
+	age50plusFemale:demographicsIncomeGroupcsv.age50plusFemale,
+	age50plusMale:demographicsIncomeGroupcsv.age50plusMale
+});
+
+// 2018 Income Statistics
+UNWIND [{incomeGroupFSO:1, url:'https://raw.githubusercontent.com/epicalekspwner/OpenDataCustomerAnalytics/main/demographicsData/demographicsIncome/2018_demographicsIncome_Group1.csv'}, {incomeGroupFSO:2, url:'https://raw.githubusercontent.com/epicalekspwner/OpenDataCustomerAnalytics/main/demographicsData/demographicsIncome/2018_demographicsIncome_Group2.csv'}, {incomeGroupFSO:3, url:'https://raw.githubusercontent.com/epicalekspwner/OpenDataCustomerAnalytics/main/demographicsData/demographicsIncome/2018_demographicsIncome_Group3.csv'}, {incomeGroupFSO:4, url:'https://raw.githubusercontent.com/epicalekspwner/OpenDataCustomerAnalytics/main/demographicsData/demographicsIncome/2018_demographicsIncome_Group4.csv'}, {incomeGroupFSO:5, url:'https://raw.githubusercontent.com/epicalekspwner/OpenDataCustomerAnalytics/main/demographicsData/demographicsIncome/2018_demographicsIncome_Group5.csv'}, {incomeGroupFSO:6, url:'https://raw.githubusercontent.com/epicalekspwner/OpenDataCustomerAnalytics/main/demographicsData/demographicsIncome/2018_demographicsIncome_Group6.csv'}, {incomeGroupFSO:7, url:'https://raw.githubusercontent.com/epicalekspwner/OpenDataCustomerAnalytics/main/demographicsData/demographicsIncome/2018_demographicsIncome_Group7.csv'}] AS demographicsIncomeGroup_urls
+LOAD CSV WITH HEADERS FROM demographicsIncomeGroup_urls.url AS demographicsIncomeGroupcsv
+CREATE (:demographicsIncomeGroup{
+	nodeType:'demographicsIncomeGroup',
+	year:2018,
+	incomeGroupFSO:toString(demographicsIncomeGroup_urls.incomeGroupFSO),
+	category:demographicsIncomeGroupcsv.category,
+	ageAllTotal:demographicsIncomeGroupcsv.ageAllTotal,
+	ageAllFemale:demographicsIncomeGroupcsv.ageAllFemale,
+	ageAllMale:demographicsIncomeGroupcsv.ageAllMale,
+	age29minusTotal:demographicsIncomeGroupcsv.age29minusTotal,
+	age29minusFemale:demographicsIncomeGroupcsv.age29minusFemale,
+	age29minusMale:demographicsIncomeGroupcsv.age29minusMale,
+	age30_49Total:demographicsIncomeGroupcsv.age30_49Total,
+	age30_49Female:demographicsIncomeGroupcsv.age30_49Female,
+	age30_49Male:demographicsIncomeGroupcsv.age30_49Male,
+	age50plusTotal:demographicsIncomeGroupcsv.age50plusTotal,
+	age50plusFemale:demographicsIncomeGroupcsv.age50plusFemale,
+	age50plusMale:demographicsIncomeGroupcsv.age50plusMale
+});
+
+// 2020 Income Statistics
+UNWIND [{incomeGroupFSO:1, url:'https://raw.githubusercontent.com/epicalekspwner/OpenDataCustomerAnalytics/main/demographicsData/demographicsIncome/2020_demographicsIncome_Group1.csv'}, {incomeGroupFSO:2, url:'https://raw.githubusercontent.com/epicalekspwner/OpenDataCustomerAnalytics/main/demographicsData/demographicsIncome/2020_demographicsIncome_Group2.csv'}, {incomeGroupFSO:3, url:'https://raw.githubusercontent.com/epicalekspwner/OpenDataCustomerAnalytics/main/demographicsData/demographicsIncome/2020_demographicsIncome_Group3.csv'}, {incomeGroupFSO:4, url:'https://raw.githubusercontent.com/epicalekspwner/OpenDataCustomerAnalytics/main/demographicsData/demographicsIncome/2020_demographicsIncome_Group4.csv'}, {incomeGroupFSO:5, url:'https://raw.githubusercontent.com/epicalekspwner/OpenDataCustomerAnalytics/main/demographicsData/demographicsIncome/2020_demographicsIncome_Group5.csv'}, {incomeGroupFSO:6, url:'https://raw.githubusercontent.com/epicalekspwner/OpenDataCustomerAnalytics/main/demographicsData/demographicsIncome/2020_demographicsIncome_Group6.csv'}, {incomeGroupFSO:7, url:'https://raw.githubusercontent.com/epicalekspwner/OpenDataCustomerAnalytics/main/demographicsData/demographicsIncome/2020_demographicsIncome_Group7.csv'}] AS demographicsIncomeGroup_urls
+LOAD CSV WITH HEADERS FROM demographicsIncomeGroup_urls.url AS demographicsIncomeGroupcsv
+CREATE (:demographicsIncomeGroup{
+	nodeType:'demographicsIncomeGroup',
+	year:2020,
+	incomeGroupFSO:toString(demographicsIncomeGroup_urls.incomeGroupFSO),
+	category:demographicsIncomeGroupcsv.category,
+	ageAllTotal:demographicsIncomeGroupcsv.ageAllTotal,
+	ageAllFemale:demographicsIncomeGroupcsv.ageAllFemale,
+	ageAllMale:demographicsIncomeGroupcsv.ageAllMale,
+	age29minusTotal:demographicsIncomeGroupcsv.age29minusTotal,
+	age29minusFemale:demographicsIncomeGroupcsv.age29minusFemale,
+	age29minusMale:demographicsIncomeGroupcsv.age29minusMale,
+	age30_49Total:demographicsIncomeGroupcsv.age30_49Total,
+	age30_49Female:demographicsIncomeGroupcsv.age30_49Female,
+	age30_49Male:demographicsIncomeGroupcsv.age30_49Male,
+	age50plusTotal:demographicsIncomeGroupcsv.age50plusTotal,
+	age50plusFemale:demographicsIncomeGroupcsv.age50plusFemale,
+	age50plusMale:demographicsIncomeGroupcsv.age50plusMale
+});
+
+// Create Relationship
+MATCH (d:demographicsIncome), (g:demographicsIncomeGroup)
+WHERE EXISTS (d.incomeGroupFSO) AND EXISTS (g.incomeGroupFSO) AND d.incomeGroupFSO=g.incomeGroupFSO AND EXISTS (d.year) AND EXISTS (g.year) AND d.year=g.year
+CREATE (g)-[:PART_OF]->(d)
+
+// ----- demographicsLanguages -----
+
+// Create Nodes with Statistics
+UNWIND [{year:2016, url:'https://raw.githubusercontent.com/epicalekspwner/OpenDataCustomerAnalytics/main/demographicsData/demographicsLanguages/2016_demographicsLanguages_Absolute.csv'}, {year:2017, url:'https://raw.githubusercontent.com/epicalekspwner/OpenDataCustomerAnalytics/main/demographicsData/demographicsLanguages/2017_demographicsLanguages_Absolute.csv'}, {year:2018, url:'https://raw.githubusercontent.com/epicalekspwner/OpenDataCustomerAnalytics/main/demographicsData/demographicsLanguages/2018_demographicsLanguages_Absolute.csv'}, {year:2019, url:'https://raw.githubusercontent.com/epicalekspwner/OpenDataCustomerAnalytics/main/demographicsData/demographicsLanguages/2019_demographicsLanguages_Absolute.csv'}, {year:2020, url:'https://raw.githubusercontent.com/epicalekspwner/OpenDataCustomerAnalytics/main/demographicsData/demographicsLanguages/2020_demographicsLanguages_Absolute.csv'}] AS demographicsLanguages_urls
+LOAD CSV WITH HEADERS FROM demographicsLanguages_urls.url AS demographicsLanguagescsv 
+CREATE (:demographicsLanguages{
+	nodeType:'demographicsLanguages',
+	year:demographicsLanguages_urls.year,
+	region:demographicsLanguagescsv.region,
+	total:demographicsLanguagescsv.total,
+	german:demographicsLanguagescsv.german,
+	french:demographicsLanguagescsv.french,
+	italian:demographicsLanguagescsv.italian,
+	romansh:demographicsLanguagescsv.romansh,
+	english:demographicsLanguagescsv.english,
+	portuguese:demographicsLanguagescsv.portuguese,
+	bosnianCroatianMontenegrinSerbian:demographicsLanguagescsv.bosnianCroatianMontenegrinSerbian,
+	albanian:demographicsLanguagescsv.albanian,
+	spanish:demographicsLanguagescsv.spanish,
+	turkish:demographicsLanguagescsv.turkish,
+	otherLanguages:demographicsLanguagescsv.otherLanguages
+});
+
+// Create Relationship
+MATCH (d:demographicsLanguages), (y:year)
+WHERE EXISTS (d.year) AND EXISTS (y.year) AND d.year=y.year AND EXISTS (d.region) AND EXISTS (y.cantonName) AND d.region=y.cantonName
+CREATE (d)-[:STATS_OF_YEAR]->(y)
+
+// ----- demographicsStructure -----
+
+// Create Nodes with Statistics
+UNWIND [{year:2016, url:'https://raw.githubusercontent.com/epicalekspwner/OpenDataCustomerAnalytics/main/demographicsData/demographicsStructure/2016_demographicsStructure_Absolute.csv'}, {year:2017, url:'https://raw.githubusercontent.com/epicalekspwner/OpenDataCustomerAnalytics/main/demographicsData/demographicsStructure/2017_demographicsStructure_Absolute.csv'}, {year:2018, url:'https://raw.githubusercontent.com/epicalekspwner/OpenDataCustomerAnalytics/main/demographicsData/demographicsStructure/2018_demographicsStructure_Absolute.csv'}, {year:2019, url:'https://raw.githubusercontent.com/epicalekspwner/OpenDataCustomerAnalytics/main/demographicsData/demographicsStructure/2019_demographicsStructure_Absolute.csv'}, {year:2020, url:'https://raw.githubusercontent.com/epicalekspwner/OpenDataCustomerAnalytics/main/demographicsData/demographicsStructure/2020_demographicsStructure_Absolute.csv'}] AS demographicsStructure_urls
+LOAD CSV WITH HEADERS FROM demographicsStructure_urls.url AS demographicsStructurecsv 
+CREATE (:demographicsStructure{
+	nodeType:'demographicsStructure',
+	year:demographicsStructure_urls.year,
+	region:demographicsStructurecsv.region,
+	total:demographicsStructurecsv.total,
+	age0_19:demographicsStructurecsv.age0_19,
+	age20_64:demographicsStructurecsv.age20_64,
+	age65plus:demographicsStructurecsv.age65plus,
+	sexMale:demographicsStructurecsv.sexMale,
+	sexFemale:demographicsStructurecsv.sexFemale,
+	citizenSwiss:demographicsStructurecsv.citizenSwiss,
+	citizenForeign:demographicsStructurecsv.citizenForeign,
+	maritalSingle:demographicsStructurecsv.maritalSingle,
+	maritalMarried:demographicsStructurecsv.maritalMarried,
+	maritalWidowed:demographicsStructurecsv.maritalWidowed,
+	maritalDivorced:demographicsStructurecsv.maritalDivorced,
+	maritalUnmarried:demographicsStructurecsv.maritalUnmarried,
+	martialRegistredPartnership:demographicsStructurecsv.martialRegistredPartnership,
+	maritalDisolvedPartnership:demographicsStructurecsv.maritalDisolvedPartnership,
+	typoUrbanCore:demographicsStructurecsv.typoUrbanCore,
+	typoUrbanCoreInfluence:demographicsStructurecsv.typoUrbanCoreInfluence,
+	typoNoUrbanCoreInfluence:demographicsStructurecsv.typoNoUrbanCoreInfluence
+});
+
+// Create Relationship
+MATCH (d:demographicsStructure), (y:year)
+WHERE EXISTS (d.year) AND EXISTS (y.year) AND d.year=y.year AND EXISTS (d.region) AND EXISTS (y.cantonName) AND d.region=y.cantonName
+CREATE (d)-[:STATS_OF_YEAR]->(y)
+
+// ----- demographicsVehicles -----
+
+// Create Nodes with Statistics
+UNWIND [{year:2016, url:'https://raw.githubusercontent.com/epicalekspwner/OpenDataCustomerAnalytics/main/demographicsData/demographicsVehicles/2016_demographicsVehicles_Absolute.csv'}, {year:2017, url:'https://raw.githubusercontent.com/epicalekspwner/OpenDataCustomerAnalytics/main/demographicsData/demographicsVehicles/2017_demographicsVehicles_Absolute.csv'}, {year:2018, url:'https://raw.githubusercontent.com/epicalekspwner/OpenDataCustomerAnalytics/main/demographicsData/demographicsVehicles/2018_demographicsVehicles_Absolute.csv'}, {year:2019, url:'https://raw.githubusercontent.com/epicalekspwner/OpenDataCustomerAnalytics/main/demographicsData/demographicsVehicles/2019_demographicsVehicles_Absolute.csv'}, {year:2020, url:'https://raw.githubusercontent.com/epicalekspwner/OpenDataCustomerAnalytics/main/demographicsData/demographicsVehicles/2020_demographicsVehicles_Absolute.csv'}] AS demographicsVehicles_urls
+LOAD CSV WITH HEADERS FROM demographicsVehicles_urls.url AS demographicsVehiclescsv
+CREATE (:demographicsVehicles{
+	nodeType:'demographicsVehicles',
+	year:demographicsVehicles_urls.year,
+	region:demographicsVehiclescsv.region,
+	total:demographicsVehiclescsv.total,
+	personalVehicles:demographicsVehiclescsv.personalVehicles,
+	passengerVehicles:demographicsVehiclescsv.passengerVehicles,
+	goodsVehicles:demographicsVehiclescsv.goodsVehicles,
+	agriculturalVehicles:demographicsVehiclescsv.agriculturalVehicles,
+	industrialVehicles:demographicsVehiclescsv.industrialVehicles,
+	motorbikes:demographicsVehiclescsv.motorbikes,
+	trailers:demographicsVehiclescsv.trailers,
+	mopeds:demographicsVehiclescsv.mopeds
+});
+
+// Create Relationship
+MATCH (d:demographicsVehicles), (y:year)
+WHERE EXISTS (d.year) AND EXISTS (y.year) AND d.year=y.year AND EXISTS (d.region) AND EXISTS (y.cantonName) AND d.region=y.cantonName
+CREATE (d)-[:STATS_OF_YEAR]->(y)
+
+// ----- geographicAgriculturalSurface -----
+
+// Create Nodes with Statistics
+UNWIND [{year:2016, url:'https://raw.githubusercontent.com/epicalekspwner/OpenDataCustomerAnalytics/main/geographicsData/geographicAgriculturalSurface/2016_geographicsAgriculturalSurface.csv'}, {year:2017, url:'https://raw.githubusercontent.com/epicalekspwner/OpenDataCustomerAnalytics/main/geographicsData/geographicAgriculturalSurface/2017_geographicsAgriculturalSurface.csv'}, {year:2018, url:'https://raw.githubusercontent.com/epicalekspwner/OpenDataCustomerAnalytics/main/geographicsData/geographicAgriculturalSurface/2018_geographicsAgriculturalSurface.csv'}, {year:2019, url:'https://raw.githubusercontent.com/epicalekspwner/OpenDataCustomerAnalytics/main/geographicsData/geographicAgriculturalSurface/2019_geographicsAgriculturalSurface.csv'}, {year:2020, url:'https://raw.githubusercontent.com/epicalekspwner/OpenDataCustomerAnalytics/main/geographicsData/geographicAgriculturalSurface/2020_geographicsAgriculturalSurface.csv'}] AS geographicAgriculturalSurface_urls
+LOAD CSV WITH HEADERS FROM geographicAgriculturalSurface_urls.url AS geographicAgriculturalSurfacecsv
+CREATE (:geographicAgriculturalSurface{
+	nodeType:'geographicAgriculturalSurface',
+	year:geographicAgriculturalSurface_urls.year,
+	region:geographicAgriculturalSurfacecsv.region,
+	numberExploitationTotal:geographicAgriculturalSurfacecsv.numberExploitationTotal,
+	numberExploitationPercentMain:geographicAgriculturalSurfacecsv.numberExploitationPercentMain,
+	employmentTotal:geographicAgriculturalSurfacecsv.employmentTotal,
+	employmentPercentFullTime:geographicAgriculturalSurfacecsv.employmentPercentFullTime,
+	surfaceTotal:geographicAgriculturalSurfacecsv.surfaceTotal,
+	surfaceOpenLand:geographicAgriculturalSurfacecsv.surfaceOpenLand,
+	surfaceGrassland:geographicAgriculturalSurfacecsv.surfaceGrassland,
+	surfaceByExploitation:geographicAgriculturalSurfacecsv.surfaceByExploitation,
+	surfaceByMainExploitation:geographicAgriculturalSurfacecsv.surfaceByMainExploitation
+});
+
+// Create Relationship
+MATCH (g:geographicAgriculturalSurface), (y:year)
+WHERE EXISTS (g.year) AND EXISTS (y.year) AND g.year=y.year AND EXISTS (g.region) AND EXISTS (y.cantonName) AND g.region=y.cantonName
+CREATE (g)-[:STATS_OF_YEAR]->(y)
+
+// ----- geographicCantonGPD -----
+
+// Create Nodes with Statistics
+UNWIND [{year:2016, url:'https://raw.githubusercontent.com/epicalekspwner/OpenDataCustomerAnalytics/main/geographicsData/geographicCantonGPD/2016_geographicsCantonGDP.csv'}, {year:2017, url:'https://raw.githubusercontent.com/epicalekspwner/OpenDataCustomerAnalytics/main/geographicsData/geographicCantonGPD/2017_geographicsCantonGDP.csv'}, {year:2018, url:'https://raw.githubusercontent.com/epicalekspwner/OpenDataCustomerAnalytics/main/geographicsData/geographicCantonGPD/2018_geographicsCantonGDP.csv'}, {year:2019, url:'https://raw.githubusercontent.com/epicalekspwner/OpenDataCustomerAnalytics/main/geographicsData/geographicCantonGPD/2019_geographicsCantonGDP.csv'}, {year:2020, url:'https://raw.githubusercontent.com/epicalekspwner/OpenDataCustomerAnalytics/main/geographicsData/geographicCantonGPD/2020_geographicsCantonGDP.csv'}] AS geographicCantonGPD_urls
+LOAD CSV WITH HEADERS FROM geographicCantonGPD_urls.url AS geographicCantonGPDcsv
+CREATE (:geographicCantonGPD{
+	nodeType:'geographicCantonGPD',
+	year:geographicCantonGPD_urls.year,
+	region:geographicCantonGPDcsv.region,
+	gdp:geographicCantonGPDcsv.gdp
+});
+
+// Create Relationship
+MATCH (g:geographicCantonGPD), (y:year)
+WHERE EXISTS (g.year) AND EXISTS (y.year) AND g.year=y.year AND EXISTS (g.region) AND EXISTS (y.cantonName) AND g.region=y.cantonName
+CREATE (g)-[:STATS_OF_YEAR]->(y)
+
+// ----- Customer Dataset Integration -----
+
+// Create Customer Nodes
+LOAD CSV WITH HEADERS FROM 'file:///CustomerDataset.csv' AS customerDatasetcsv
+CREATE (:customer{
+	customerId:customerDatasetcsv.CustomerID,
+	name:customerDatasetcsv.Name,
+	surname:customerDatasetcsv.Surname,
+	gender:customerDatasetcsv.Gender,
+	email:customerDatasetcsv.Email,
+	inscription:customerDatasetcsv.Inscription,
+	inscriptionDays:customerDatasetcsv.Inscription_Days,
+	sales:customerDatasetcsv.Sales,
+	distance:customerDatasetcsv.Distance,
+	zip:customerDatasetcsv.ZIP,
+	locality:customerDatasetcsv.Locality,
+	commune:customerDatasetcsv.Commune,
+	canton:customerDatasetcsv.Canton,
+	language:customerDatasetcsv.Language
+});
+
+// Create Relationship
+MATCH (g:canton), (c:customer)
+WHERE EXISTS (g.cantonName) AND EXISTS (c.canton) AND g.cantonName=c.canton
+CREATE (c)-[:CUSTOMER_IN]->(g)
+
+// ----- Display Knowledge Graph Visually -----
+MATCH (n) RETURN n

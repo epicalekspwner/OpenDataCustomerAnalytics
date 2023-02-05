@@ -1,7 +1,8 @@
 ## equidsSummering: File, Metadata & Attributes
 
 ### **File**
-- ```equids-summering-canton.csv```: Number of equids in the summering zone by canton
+*Note: only the last 5 years are being considerated for data coherence and relevance purposes!*
+- ```20XX_equidsSummering.csv```: Number of equids in the summering zone by canton
 
 ### **Metadata**
 
@@ -21,74 +22,11 @@
 #### Dataset Attributes
 - **Names**: See below
 - **Values**:
-  - ```Year```: Numerical
-  - ```Month```: Numerical
-  - ```AI```: Numerical
-  - ```AR```: Numerical
-  - ```BE```: Numerical
-  - ```FR```: Numerical
-  - ```GL```: Numerical
-  - ```GR```: Numerical
-  - ```JU```: Numerical
-  - ```LU```: Numerical
-  - ```NE```: Numerical
-  - ```NW```: Numerical
-  - ```OW```: Numerical
-  - ```SG```: Numerical
-  - ```SO```: Numerical
-  - ```SZ```: Numerical
-  - ```TI```: Numerical
-  - ```UR```: Numerical
-  - ```VD```: Numerical
-  - ```VS```: Numerical
-  - ```ZG```: Numerical
-  - ```??```: Numerical
+  - ```equidsNumberCensus```: Numerical
 - **Types**:
-  - ```Year```: Integer
-  - ```Month```: Integer
-  - ```AI```: Integer
-  - ```AR```: Integer
-  - ```BE```: Integer
-  - ```FR```: Integer
-  - ```GL```: Integer
-  - ```GR```: Integer
-  - ```JU```: Integer
-  - ```LU```: Integer
-  - ```NE```: Integer
-  - ```NW```: Integer
-  - ```OW```: Integer
-  - ```SG```: Integer
-  - ```SO```: Integer
-  - ```SZ```: Integer
-  - ```TI```: Integer
-  - ```UR```: Integer
-  - ```VD```: Integer
-  - ```VS```: Integer
-  - ```ZG```: Integer
-  - ```??```: Integer
+  - ```equidsNumberCensus```: Integer
 - **Units**:
-  - ```Year```: Considered year
-  - ```Month```: Considered month
-  - ```AI```: Number of equids in the summering zone in AI
-  - ```AR```: Number of equids in the summering zone in AR
-  - ```BE```: Number of equids in the summering zone in BE
-  - ```FR```: Number of equids in the summering zone in FR
-  - ```GL```: Number of equids in the summering zone in GL
-  - ```GR```: Number of equids in the summering zone in GR
-  - ```JU```: Number of equids in the summering zone in JU
-  - ```LU```: Number of equids in the summering zone in LU
-  - ```NE```: Number of equids in the summering zone in NE
-  - ```NW```: Number of equids in the summering zone in NW
-  - ```OW```: Number of equids in the summering zone in OW
-  - ```SG```: Number of equids in the summering zone in SG
-  - ```SO```: Number of equids in the summering zone in SO
-  - ```SZ```: Number of equids in the summering zone in SZ
-  - ```TI```: Number of equids in the summering zone in TI
-  - ```UR```: Number of equids in the summering zone in UR
-  - ```VD```: Number of equids in the summering zone in VD
-  - ```VS```: Number of equids in the summering zone in VS
-  - ```ZG```: Number of equids in the summering zone in ZG
-  - ```??```: Number of equids in the summering zone in undefined canton
+  - ```equidsNumberCensus```: Number of equids
   
 #### Level of Detail
 - **Spatial Coverage**: Switzerland
@@ -117,25 +55,11 @@
 - **Download URL**: https://tierstatistik.identitas.ch/data/equids-summering-canton.csv
 
 ### **Attributes**
-  - ```Year```: Considered year
-  - ```Month```: Considered month
-  - ```AI```: Number of equids in the summering zone in AI
-  - ```AR```: Number of equids in the summering zone in AR
-  - ```BE```: Number of equids in the summering zone in BE
-  - ```FR```: Number of equids in the summering zone in FR
-  - ```GL```: Number of equids in the summering zone in GL
-  - ```GR```: Number of equids in the summering zone in GR
-  - ```JU```: Number of equids in the summering zone in JU
-  - ```LU```: Number of equids in the summering zone in LU
-  - ```NE```: Number of equids in the summering zone in NE
-  - ```NW```: Number of equids in the summering zone in NW
-  - ```OW```: Number of equids in the summering zone in OW
-  - ```SG```: Number of equids in the summering zone in SG
-  - ```SO```: Number of equids in the summering zone in SO
-  - ```SZ```: Number of equids in the summering zone in SZ
-  - ```TI```: Number of equids in the summering zone in TI
-  - ```UR```: Number of equids in the summering zone in UR
-  - ```VD```: Number of equids in the summering zone in VD
-  - ```VS```: Number of equids in the summering zone in VS
-  - ```ZG```: Number of equids in the summering zone in ZG
-  - ```??```: Number of equids in the summering zone in undefined canton
+
+#### Region
+- ```region```: Region of interest 
+  - **Canton**: AI, AR, BE, FR, GL, GR, JU, LU, NE, NW, OW, SG, SO, SZ, TI, UR, VD, VS, ZG 
+  - **Country**: CH 
+
+#### Total
+- ```equidsNumberCensus```: Number of equids in the summering zone per canton
